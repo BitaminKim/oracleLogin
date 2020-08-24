@@ -27,7 +27,7 @@ const Password = process.env.PASSWORD;
     await page.click(inputTypeSubmit);
     console.log("等待下一页加载");
     const html2 = await page.content();
-    console.log("html2);
+    console.log(html2);
     await page.waitFor("#idcs-app-shell-section-login-text");
     console.log("输入用户名");
     await page.type("#idcs-signin-basic-signin-form-username", UserName);
