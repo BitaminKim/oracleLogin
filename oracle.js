@@ -25,7 +25,7 @@ const Password = process.env.PASSWORD;
     let inputTypeSubmit = await page.$('#cloudAccountButton');
     console.log("点击确定");
     await inputTypeSubmit.click();
-    console.log("等待下一页加载");
+    console.log("等待下一页加载",Tenant);
     await page.waitFor(3000);
     const html2 = await page.content();
     console.log(html2);
