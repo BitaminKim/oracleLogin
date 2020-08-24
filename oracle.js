@@ -18,26 +18,30 @@ const Password = process.env.PASSWORD;
     const page = await browser.newPage();
 
     console.log("等待页面加载 " );
-    await page.goto("https://www.oracle.com/cloud/sign-in.html");
+    try {
+        await page.goto("https://www.oracle.com/cloud/sign-in.html");
+    } catch (e) {
+        throw new Error('请求页面超时'+e);
+    }
+    
     await page.waitFor("#cloudAccountName");
     console.log("输入tenant");
     await page.type("#cloudAccountName", Tenant);
     let inputTypeSubmit = await page.$('#cloudAccountButton');
     console.log("点击确定");
     await inputTypeSubmit.click();
-    console.log("等待下一页加载",Tenant);
-    await page.waitFor(3000);
-    const html2 = await page.content();
-    console.log(html2);
-    await page.waitFor("#idcs-app-shell-section-login-text");
+    console.log("等待下一页加载");
+    await page.waitFor(30000);
+    
+    await page.waitFor("#idcs-signin-basic-signin-form-username");
     console.log("输入用户名");
     await page.type("#idcs-signin-basic-signin-form-username", UserName);
+
+    await page.waitFor(".oj-inputpassword-input");
     console.log("输入密码");
-    await page.type("#idcs-signin-basic-signin-form-password|input", Password);
-    // await page.click(inputTypeSubmit);
+    await page.type(".oj-inputpassword-input", Password);
 
     console.log("点击登录");
-
     await page.click(".oj-button-label");
 
     try {
