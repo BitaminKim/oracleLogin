@@ -26,11 +26,11 @@ const Password = process.env.PASSWORD;
     console.log("点击确定");
     await page.click(inputTypeSubmit);
     console.log("等待下一页加载");
-    await page.waitFor("#idcs-signin-basic-signin-form-username");
+    await page.waitFor("#idcs-app-shell-section-login-text");
     console.log("输入用户名");
     await page.type("#idcs-signin-basic-signin-form-username", UserName);
     console.log("输入密码");
-    await page.type(".oj-inputpassword-input", Password);
+    await page.type("#idcs-signin-basic-signin-form-password|input", Password);
     // await page.click(inputTypeSubmit);
 
     console.log("点击登录");
