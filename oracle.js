@@ -9,39 +9,36 @@ const Password = process.env.PASSWORD;
     console.log("Tenant", Tenant.length)
     console.log("UserName", UserName.length)
     console.log("Password", Password.length)
-    if (Tenant === "" || UserName === "" || Password === "" ) {
+    if (Tenant === "" || UserName === "" || Password === "") {
         console.log("请输入");
         process.exit(1);
         return
     }
-    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox','--lang=zh-CN,zh']});
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
 
-    console.log("等待页面加载 " );
-    try {
-        await page.goto("https://www.oracle.com/cloud/sign-in.html");
-    } catch (e) {
-        throw new Error('请求页面超时'+e);
-    }
-    
+    console.log("等待页面加载 ");
+    await page.goto("https://www.oracle.com/cloud/sign-in.html");
     await page.waitFor("#cloudAccountName");
     console.log("输入tenant");
     await page.type("#cloudAccountName", Tenant);
-    let inputTypeSubmit = await page.$('#cloudAccountButton');
+    var inputTypeSubmit = '#cloudAccountButton';
     console.log("点击确定");
-    await inputTypeSubmit.click();
+    await page.click(inputTypeSubmit);
     console.log("等待下一页加载");
-    await page.waitFor(120000);
-    
-    await page.waitFor("#idcs-signin-basic-signin-form-username");
+    try {
+        await page.waitFor("#idcs-signin-basic-signin-form-username", {timeout: 3000});
+    } catch (e) {
+        await sleep(10*1000)
+    }
     console.log("输入用户名");
     await page.type("#idcs-signin-basic-signin-form-username", UserName);
-
-    await page.waitFor(".oj-inputpassword-input");
     console.log("输入密码");
     await page.type(".oj-inputpassword-input", Password);
+    // await page.click(inputTypeSubmit);
 
     console.log("点击登录");
+
     await page.click(".oj-button-label");
 
     try {
@@ -58,3 +55,8 @@ const Password = process.env.PASSWORD;
     }
 
 })();
+function sleep(ms) {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
+}
