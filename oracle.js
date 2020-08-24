@@ -14,7 +14,7 @@ const Password = process.env.PASSWORD;
         process.exit(1);
         return
     }
-    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox','--lang=zh-CN,zh']});
     const page = await browser.newPage();
 
     console.log("等待页面加载 " );
