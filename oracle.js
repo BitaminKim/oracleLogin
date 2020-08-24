@@ -26,6 +26,7 @@ const Password = process.env.PASSWORD;
     console.log("点击确定");
     await inputTypeSubmit.click();
     console.log("等待下一页加载");
+    await page.waitFor(3000);
     const html2 = await page.content();
     console.log(html2);
     await page.waitFor("#idcs-app-shell-section-login-text");
