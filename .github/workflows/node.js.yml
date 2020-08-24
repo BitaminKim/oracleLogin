@@ -3,8 +3,10 @@
 name: Node.js CI
 
 on:
-  schedule:
-    - cron:  '0 0 10 * *'
+  push:
+    branches: [ master ]
+  #schedule:
+    #- cron:  '0 0 10 * *'
 
 jobs:
   build:
