@@ -31,7 +31,7 @@ const Password = process.env.PASSWORD;
     console.log("点击确定");
     await inputTypeSubmit.click();
     console.log("等待下一页加载");
-    await page.waitFor(60000);
+    await page.waitFor(120000);
     
     await page.waitFor("#idcs-signin-basic-signin-form-username");
     console.log("输入用户名");
