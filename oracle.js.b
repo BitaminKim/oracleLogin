@@ -37,10 +37,6 @@ var RetryCount = 3;
     console.log("点击Continue");
     await inputTypeSubmit.click();
     console.log("等待下一页加载");
-    await page.waitFor("#submit-federation");
-    console.log("点击SSOContinue");
-    await page.click('#submit-federation');
-    console.log("等待下一页加载");
 	
     try {
     	await page.waitFor(30000);
