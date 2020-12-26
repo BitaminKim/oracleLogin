@@ -27,9 +27,8 @@ const Password = process.env.PASSWORD;
     await page.click(inputTypeSubmit);
     console.log("等待下一页加载");
     await page.waitFor("#submit-federation");
-    var federationSubmit = '#submit-federation';
     console.log("点击SSOContinue");
-    await page.click(federationSubmit);
+    await page.click('#submit-federation');
     console.log("等待下一页加载");
     
     let userNameInputed = false;
