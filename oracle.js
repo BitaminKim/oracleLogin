@@ -31,7 +31,7 @@ const Password = process.env.PASSWORD;
     await page.click('#submit-federation');
     console.log("等待下一页加载");
     
-    let userNameInputed = false;
+    let userNameInputed = true;
     while (userNameInputed){
         try {
             await page.waitFor("#idcs-signin-basic-signin-form-username", {timeout: 3000});
@@ -41,9 +41,10 @@ const Password = process.env.PASSWORD;
         console.log("输入用户名");
         try{
             await page.type("#idcs-signin-basic-signin-form-username", UserName);
-            userNameInputed  = true
+            userNameInputed  = false
         }catch (e){
-            console.log("输入用户名失败")
+            userNameInputed  = true
+            console.log("输入用户名失败",e)
         }
     }
     console.log("输入密码");
