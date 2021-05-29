@@ -12,6 +12,6 @@ fork过去就行了吧??
 [如何添加账号密码](https://docs.github.com/cn/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets)  
 只要添加这三个字段 `PASSWORD`   `TENANT`  `USER_NAME`
 
-添加完如图:  
+添加完如图:   
 ![](https://github.com/TestSmirk/oracleLogin/blob/master/imgs/passwd.png)
 
